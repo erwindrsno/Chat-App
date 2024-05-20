@@ -13,6 +13,8 @@ app.use(express.static('public'));
 io.on('connection', (socket) => {
     console.log('a user connected');
 
+    socket.emit("greetings", "Welcome to chat app");
+
     socket.on('disconnect', () => {
         console.log('a user disconnected');
     })
