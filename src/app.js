@@ -1,22 +1,26 @@
 import express from 'express';
 import http from 'http';
-import { Server } from 'socket.io';
+import { WebSocketServer } from 'ws';
 
 const app = express();
 const server = http.createServer(app);
-const io = new Server(server);
+const wss = new WebSocketServer( { server, path: '/web-socket' } );
 
 const PORT = 3000;
 
 app.use(express.static('public'));
 
-io.on('connection', (socket) => {
-    console.log('a user connected');
+wss.on('connection', (socket) => {
+    console.log(`a user connected`);
 
-    socket.emit("greetings", "Welcome to chat app");
+    socket.send("Welcome to chat app! -server");
 
-    socket.on('disconnect', () => {
-        console.log('a user disconnected');
+    socket.on('message', message => {
+        console.log(`the message is ${message}`);
+    })
+
+    socket.on('close', () => {
+        console.log(`${socket.id} a user disconnected`);
     })
 })
 

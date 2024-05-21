@@ -4,10 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="/socket.io/socket.io.js"></script>
+    <!-- <script src="/socket.io/socket.io.js"></script> -->
+    <script src="https://unpkg.com/htmx.org@1.9.12"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
     <script src="./script/script.js" defer></script>
+    
 </head>
 <body>
-    <h1>Socket.io</h1>
+    <div hx-ext="ws" ws-connect="/web-socket">
+        <div id="notifications"></div>
+        <div id="chat_room">
+        </div>
+        <form id="form" ws-send>
+            <input name="chat_message">
+        </form>
+    </div>
 </body>
+
 </html>
