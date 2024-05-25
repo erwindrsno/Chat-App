@@ -12,6 +12,10 @@
     
 </head>
 <body>
+
+    <div id="chats">
+
+    </div>
     <div hx-ext="ws" ws-connect="/web-socket">
         <form id="form" ws-send>
             <input name="chat_message" type="text" placeholder="Type a message..." required>
@@ -19,7 +23,6 @@
         </form>
         <div id="notifications"></div>
     </div>
-
 </body>
 
 </html>

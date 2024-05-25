@@ -11,10 +11,14 @@
 //     console.log(`from server : ${event.data}`);
 // })
 
-// const notifications = document.getElementById('notifications');
+const notifications = document.getElementById('notifications');
 
-// notifications.addEventListener("htmx:wsAfterMessage", function (event) {
-//     const oobTarget = event.detail.message;
-//     console.log("Konten OOB diperbarui:", oobTarget);
-//     // Lakukan tindakan lain setelah konten OOB diperbarui
-// });
+// console.log(notifications);
+
+notifications.addEventListener("htmx:wsOpen", event => {
+    console.log("hello");
+    console.log(event);
+    // const oobTarget = event.detail.message;
+    // console.log("Konten OOB diperbarui:", oobTarget);
+    // Lakukan tindakan lain setelah konten OOB diperbarui
+});
