@@ -15,19 +15,29 @@ app.use(express.static(staticPath));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+let message = [];
+
 wss.on('connection', (socket) => {
     console.log(`a user connected`);
 
-    socket.send("Welcome to chat app! -server");
+    socket.send(`<div hx-swap-oob="beforeend:#notifications"><p>plis bisa htmx</p></div>`);
 
     socket.on('message', data => {
         const pesan = JSON.parse(data);
         console.log(pesan.chat_message);
+        // message.push(pesan.chat_message);
+        // socket.send("Your message is " + pesan);
+        socket.send(`<div hx-swap-oob="beforeend:#notifications"><p>${pesan.chat_message}</p></div>`);
+        // console.log(data);
     })
 
     socket.on('close', () => {
-        console.log(`${socket.id} a user disconnected`);
+        console.log(`a user disconnected`);
     })
+})
+
+app.get('chat', (req, res) => {
+    res.send("haiiiii");
 })
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));

@@ -7,19 +7,19 @@
     <!-- <script src="/socket.io/socket.io.js"></script> -->
     <script src="https://unpkg.com/htmx.org@1.9.12"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/sse.js"></script>
     <script src="./script/script.js" defer></script>
     
 </head>
 <body>
     <div hx-ext="ws" ws-connect="/web-socket">
-        <div id="notifications"></div>
-        <div id="chat_room">
-        </div>
         <form id="form" ws-send>
             <input name="chat_message" type="text" placeholder="Type a message..." required>
             <button type="submit">Send</button>
         </form>
+        <div id="notifications"></div>
     </div>
+
 </body>
 
 </html>
