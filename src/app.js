@@ -22,9 +22,12 @@ wss.on('connection', (socket, req) => {
     socket.on('message', data => {
         const pesan = JSON.parse(data);
 
-        wss.clients.forEach(function each(client) {
-            if (client.readyState === WebSocket.OPEN) {
-                client.send(`<div hx-swap-oob="beforeend:#chats"><p>${pesan.chat_message}</p></div>`);
+        wss.clients.forEach(client => {
+            if (client === socket && client.readyState === WebSocket.OPEN) {
+                client.send(`<div hx-swap-oob="beforeend:#chats"><p style="color:red">${pesan.chat_message}</p></div>`);
+            }
+            else{
+                client.send(`<div hx-swap-oob="beforeend:#chats"><p style="color:blue">${pesan.chat_message}</p></div>`);
             }
         });
     })
