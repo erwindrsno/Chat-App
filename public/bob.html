@@ -13,9 +13,9 @@
 </head>
 <body>
 
-    <div id="greetings" hx-get="http://localhost:3000/user/alice" hx-swap="beforeend" hx-trigger="load"></div>
+    <div id="greetings" hx-get="http://localhost:3000/user/bob" hx-swap="beforeend" hx-trigger="load"></div>
 
-    <div id="chats" style="color:red"></div>
+    <div id="chats" style="color:blue"></div>
 
     <div hx-ext="ws" ws-connect="/web-socket">
         <form id="form" ws-send>

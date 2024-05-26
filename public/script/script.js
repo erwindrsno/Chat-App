@@ -1,24 +1,12 @@
-// const socket = new WebSocket('ws://localhost:3000/web-socket');
+const greetings = document.getElementById('greetings');
 
-// socket.addEventListener('open', event => {
-//     // socket.send("hello server");
-//     console.log(event);
-//     console.log("connected to server");
+// greetings.addEventListener('htmx:beforeRequest', event => {
+//     console.log(event.detail);
 // })
 
-// socket.addEventListener('message', event => {
-//     console.log(event);
-//     console.log(`from server : ${event.data}`);
+const form = document.getElementById('form');
+
+// form.addEventListener('htmx:wsConfigSend', event => {
+//     console.log(event.detail.parameters.chat_message);
+//     event.detail.parameters.custom_data = "tambahan data";
 // })
-
-const notifications = document.getElementById('notifications');
-
-// console.log(notifications);
-
-notifications.addEventListener("htmx:wsOpen", event => {
-    console.log("hello");
-    console.log(event);
-    // const oobTarget = event.detail.message;
-    // console.log("Konten OOB diperbarui:", oobTarget);
-    // Lakukan tindakan lain setelah konten OOB diperbarui
-});

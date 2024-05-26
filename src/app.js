@@ -16,21 +16,28 @@ app.use(express.static(staticPath));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-let message = [];
-
 wss.on('connection', (socket, req) => {
 
-    console.log(wss.clients);
+    // console.log(wss.clients);
+    console.log('a user connected');
 
-    socket.send(`<div hx-swap-oob="beforebegin:#chats"><p>Welcome</p></div>`);
+    // console.log(socket);
+
+    // socket.send(`<div hx-swap-oob="beforebegin:#chats"><p>Welcome</p></div>`);
 
     socket.on('message', data => {
+        // console.log(data)
         const pesan = JSON.parse(data);
-        console.log(pesan.chat_message);
         // message.push(pesan.chat_message);
         // socket.send("Your message is " + pesan);
-        socket.send(`<div hx-swap-oob="beforeend:#chats"><p>${pesan.chat_message}</p></div>`);
+        // socket.send(`<div hx-swap-oob="beforeend:#chats"><p>${pesan.chat_message}</p></div>`);
         // console.log(data);
+
+        wss.clients.forEach(function each(client) {
+            if (client.readyState === WebSocket.OPEN) {
+                client.send(`<div hx-swap-oob="beforeend:#chats"><p>${pesan.chat_message}</p></div>`);
+            }
+        });
     })
 
     socket.on('close', () => {
@@ -38,8 +45,9 @@ wss.on('connection', (socket, req) => {
     })
 })
 
-app.get('chat', (req, res) => {
-    res.send("haiiiii");
+app.get('/user/:username', (req, res) => {
+    const name = req.params.username;
+    res.send(`<p>Welcome to chatX! ${name}</p>`);
 })
 
 server.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
