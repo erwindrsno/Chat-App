@@ -17,21 +17,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 wss.on('connection', (socket, req) => {
-
-    // console.log(wss.clients);
     console.log('a user connected');
 
-    // console.log(socket);
-
-    // socket.send(`<div hx-swap-oob="beforebegin:#chats"><p>Welcome</p></div>`);
-
     socket.on('message', data => {
-        // console.log(data)
         const pesan = JSON.parse(data);
-        // message.push(pesan.chat_message);
-        // socket.send("Your message is " + pesan);
-        // socket.send(`<div hx-swap-oob="beforeend:#chats"><p>${pesan.chat_message}</p></div>`);
-        // console.log(data);
 
         wss.clients.forEach(function each(client) {
             if (client.readyState === WebSocket.OPEN) {
